@@ -1,7 +1,17 @@
-from django.shortcuts import render
+from django.contrib.auth import login, logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.views import LoginView
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+from .forms import *
 from .models import *
 from django.http import JsonResponse
 import json
+
+from .utils import DataMixin
+
+
 # Create your views here.
 
 
@@ -87,3 +97,36 @@ def update_item(request):
 
     return JsonResponse('Item was added!', safe=False)
 
+
+class RegisterUser(DataMixin, CreateView):
+    form_class = RegisterUserForm
+    template_name = 'store/register.html'
+    success_url = reverse_lazy('store')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="NameSite")
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('store')
+
+
+class LoginUser(DataMixin, LoginView):
+    form_class = AuthenticationForm
+    template_name = 'store/login.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="NameSite")
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def get_success_url(self):
+        return reverse_lazy('store')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('store')
