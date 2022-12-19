@@ -11,7 +11,8 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('show_post/<slug:post_slug>/', show_post, name='show_post'),
     path('show_categories/<slug:cat_slug>/', show_category, name='cats'),
-    path('show_cats_list', show_cats_list, name='show_cats_list')
+    path('show_cats_list', show_cats_list, name='show_cats_list'),
+    path('add_product', add_product, name='add_product')
 ]
 
 

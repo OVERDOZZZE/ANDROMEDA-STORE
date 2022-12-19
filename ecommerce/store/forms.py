@@ -2,6 +2,8 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from store.models import Product
+
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(label='Имя пользователя', widget=forms.TextInput(attrs={'class': 'form-input'}))
@@ -19,3 +21,12 @@ class RegisterUserForm(UserCreationForm):
             'password2': forms.PasswordInput(attrs={'class': 'form-input'})
         }
 
+
+class AddProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'content', 'price', 'image', 'cat', 'slug']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-input'}),
+            'content': forms.Textarea(attrs={'cols': 60, 'rows': 10})
+        }

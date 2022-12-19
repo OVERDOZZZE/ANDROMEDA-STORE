@@ -63,7 +63,7 @@
 	    </ul>
 	    <div class="form-inline my-2 my-lg-0">
 			{% if request.user.is_authenticated %}
-				<li class="list-cats"><a class="add_item" href="">
+				<li class="list-cats"><a class="add_item" href="{% url 'add_product' %}">
 
 					<i class="fa-solid fa-square-plus"></i> ДОБАВИТЬ ТОВАР</a></li>
 			<br>

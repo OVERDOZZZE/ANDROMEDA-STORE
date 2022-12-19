@@ -157,6 +157,20 @@ def show_cats_list(request):
     return render(request, 'store/show_cats_list.html', context=context)
 
 
+def add_product(request):
+    if request.method == 'POST':
+        form = AddProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('store')
+    else:
+        form = AddProductForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, 'store/add_product.html', context=context)
+
 # class ProductCategories(DataMixin, ListView):
 #     model = Product
 #     template_name = 'store/main.html'
