@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
+
+
 # Create your models here.
 
 
@@ -7,6 +10,7 @@ class Customer(models.Model):
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255)
+
 
     def __str__(self):
         return self.name
@@ -17,6 +21,10 @@ class Product(models.Model):
     price = models.FloatField()
     digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(null=True, blank=True)
+    content = models.TextField(null=True)
+
+    def get_absolute_url(self):
+        return reverse('show_post', kwargs={'post_id': self.pk})
 
     def __str__(self):
         return self.name
@@ -28,7 +36,7 @@ class Product(models.Model):
         except:
             url = ''
         return url
-        
+
         
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True)

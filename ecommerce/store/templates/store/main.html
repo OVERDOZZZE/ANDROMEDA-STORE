@@ -3,7 +3,7 @@
 <html>
 <head>
 	<title>Ecom</title>
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -34,7 +34,8 @@
 <body>
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  <a class="navbar-brand" href="{% url 'store' %}">ANDROMEDA</a>
+	  <a class="navbar-brand" href="{% url 'store' %}">
+		  <i class="fa-solid fa-infinity"></i> ANDROMEDA</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -42,16 +43,29 @@
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav mr-auto">
 	      <li class="nav-item active">
-	        <a class="nav-link" href="{% url 'store' %}">ГЛАВНАЯ<span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="{% url 'store' %}">
+				<i class="fa-solid fa-house"></i> ГЛАВНАЯ<span class="sr-only">(current)</span></a>
 	      </li>
+
+			<li class="cart-place">
+				<a href="{% url 'cart' %}">
+					<i class="fa-solid fa-cart-shopping"></i> КОРЗИНА</a>
+			</li>
+
+
 
 
 	    </ul>
 	    <div class="form-inline my-2 my-lg-0">
 			{% if request.user.is_authenticated %}
+				<li class="list-cats"><a class="add_item" href="">
+
+					<i class="fa-solid fa-square-plus"></i> ДОБАВИТЬ ТОВАР</a></li>
+			<br>
+
 	     		<li class="list-cats"><a href="">{{ user.username }} |</a> <a href="{% url 'logout' %}">Выйти</a></li>
 			{% else %}
-            	li class="btn btn-dark"><a href="{% url 'registration' %}">Регистрация |</a><a href="{% url 'login' %}"> Войти</a></li>
+            	<li class="list-cats"><a href="{% url 'registration' %}">Регистрация |</a><a href="{% url 'login' %}"> Войти</a></li>
         	{% endif %}
 	     	<a href="{% url 'cart' %}">
 	    		<img  id="cart-icon" src="{% static 'store/images/cart.png' %}">
@@ -62,6 +76,13 @@
 	  </div>
 	</nav>
 
+	 <div class="cats">
+        <aside>
+
+            <div class="little_change">Категории</div>
+
+        </aside>
+    </div>
      <div class="container">
             <br>
             {% block content %}
@@ -76,5 +97,23 @@
 
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{% static 'store/js/cart.js' %}"></script>
+
+
+<!-- Блок контента -->
+	<div class="content-text">
+
+	</div>
+<!-- Конец блока контента -->
+
+<!--</td></tr></table>-->
+<!--</td></tr>-->
+<!--&lt;!&ndash; Footer &ndash;&gt;-->
+<!--<tr><td valign=top>-->
+<!--	<div id="footer">-->
+<!--		<p>&copy; 2021 Частичное или полное копирование информации с данного сайта для распространения на других ресурсах, в том числе и бумажных, строго запрещено.</p>-->
+<!--	</div>-->
+<!--</td></tr></table>-->
+<!--&lt;!&ndash; Конец footer'а и страницы &ndash;&gt;-->
+
 </body>
 </html>

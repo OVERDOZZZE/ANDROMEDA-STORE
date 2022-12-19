@@ -1,9 +1,12 @@
 {% extends 'store/main.html' %}
+{% load static %}
 
 {% block content %}
-<form action="" method="post">
+<link rel="stylesheet" href="{% static 'store/css/registration.css' %}">
+<form class="box" action="" method="post" clas="login">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Войти</button>
+    <button class="btn btn-success" type="submit">Войти</button>
 </form>
 {% endblock %}
+

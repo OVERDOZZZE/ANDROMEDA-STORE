@@ -1,12 +1,12 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView
 from .forms import *
 from .models import *
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
 
 from .utils import DataMixin
@@ -130,3 +130,11 @@ class LoginUser(DataMixin, LoginView):
 def logout_user(request):
     logout(request)
     return redirect('store')
+
+
+def show_post(request, post_id):
+    product = get_object_or_404(Product, id=post_id)
+    context = {
+        'product': product
+    }
+    return render(request, 'store/show_post.html', context=context)
