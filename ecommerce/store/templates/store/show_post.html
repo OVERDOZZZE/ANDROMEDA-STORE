@@ -1,12 +1,8 @@
 {% extends 'store/main.html' %}
-
+{% load static %}
 
 {% block content %}
 <h1>{{product.title}}</h1>
-
-
-
-
 <div class="zxc3">
     <p><img class='zxc2' width="500px" class="img-article-left" src="{{product.image.url}}"></p>
     <h3>  Цена: {{ product.price }}$  </h3>

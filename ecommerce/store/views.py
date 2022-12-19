@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView
+from django.views.generic import CreateView, DeleteView, ListView
 from .forms import *
 from .models import *
 from django.http import JsonResponse, HttpResponse
@@ -23,7 +23,7 @@ def store(request):
         cartItems = order.get_cart_items
     else:
         items = []
-        order = {'get_cart_total':0, 'get_cart_items': 0}
+        order = {'get_cart_total': 0, 'get_cart_items': 0}
         cartItems = order['get_cart_items']
 
     products = Product.objects.all()
@@ -31,7 +31,7 @@ def store(request):
         'products': products,
         'cartItems': cartItems,
     }
-    return render(request, 'store/store.html', context)
+    return render(request, 'store/store.html', context=context)
 
 
 def cart(request):
@@ -132,9 +132,43 @@ def logout_user(request):
     return redirect('store')
 
 
-def show_post(request, post_id):
-    product = get_object_or_404(Product, id=post_id)
+def show_post(request, post_slug):
+    product = get_object_or_404(Product, slug=post_slug)
     context = {
         'product': product
     }
     return render(request, 'store/show_post.html', context=context)
+
+
+def show_category(request, cat_slug):
+    products = Product.objects.filter(cat__slug= cat_slug)
+
+    context = {
+        'title': 'Отображение по рубрикам',
+        'products': products,
+        }
+
+    return render(request, 'store/store.html', context=context)
+
+
+def show_cats_list(request):
+    cats = Category.objects.all()
+    context = {'cats': cats}
+    return render(request, 'store/show_cats_list.html', context=context)
+
+
+# class ProductCategories(DataMixin, ListView):
+#     model = Product
+#     template_name = 'store/main.html'
+#     context_object_name = 'products'
+#     allow_empty = False
+#
+#     def get_queryset(self):
+#         return Product.objects.filter(cat__slug=self.kwargs['cat_slug'])
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         c_def = self.get_user_context(title=" NameSite")
+#         return dict(list(context.items()) + list(c_def.items()))
+
+

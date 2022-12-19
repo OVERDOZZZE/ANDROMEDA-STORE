@@ -11,7 +11,6 @@ class Customer(models.Model):
     name = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255)
 
-
     def __str__(self):
         return self.name
 
@@ -22,9 +21,11 @@ class Product(models.Model):
     digital = models.BooleanField(default=False, null=True, blank=False)
     image = models.ImageField(null=True, blank=True)
     content = models.TextField(null=True)
+    slug = models.SlugField(max_length=255, db_index=True, verbose_name='url', unique=True, null=True)
+    cat = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
 
     def get_absolute_url(self):
-        return reverse('show_post', kwargs={'post_id': self.pk})
+        return reverse('show_post', kwargs={'post_slug': self.slug})
 
     def __str__(self):
         return self.name
@@ -85,9 +86,24 @@ class ShippingAddress(models.Model):
         return self.address
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=255, db_index=True)
+    slug = models.SlugField(max_length=255, db_index=True, verbose_name='url', unique=True)
+    image = models.ImageField(upload_to='media/cats_images', null=True)
 
+    def __str__(self):
+        return self.name
 
+    def get_absolute_url(self):
+        return reverse('cats', kwargs={'cat_slug': self.slug})
 
+    @property
+    def image_URL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
 
 
 

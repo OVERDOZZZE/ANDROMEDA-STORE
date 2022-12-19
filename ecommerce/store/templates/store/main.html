@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load store_tags %}
 <html>
 <head>
 	<title>Ecom</title>
@@ -51,6 +52,10 @@
 				<a href="{% url 'cart' %}">
 					<i class="fa-solid fa-cart-shopping"></i> КОРЗИНА</a>
 			</li>
+			<li class="cart-place">
+				<a href="{% url 'show_cats_list' %}">
+					<i class="fa-solid fa-bars"></i> КАТЕГОРИИ</a>
+			</li>
 
 
 
@@ -76,13 +81,12 @@
 	  </div>
 	</nav>
 
-	 <div class="cats">
-        <aside>
-
-            <div class="little_change">Категории</div>
-
-        </aside>
-    </div>
+<!--	 <div class="cats">-->
+<!--        <aside>-->
+<!--            <div class="little_change">Категории</div>-->
+<!--			<div class="cats">{% show_categories %}</div>-->
+<!--        </aside>-->
+<!--    </div>-->
      <div class="container">
             <br>
             {% block content %}

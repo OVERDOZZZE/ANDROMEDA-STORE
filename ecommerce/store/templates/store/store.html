@@ -2,6 +2,13 @@
 {% load static %}
 
 {% block content %}
+<div class="search_stroke">
+			<form action="" method="post">
+				{% csrf_token %}
+
+				<input type="text" placeholder="Искать">
+			</form>
+		</div>
     <div class="row">
         {% for product in products %}
         <div class="col-lg-4">

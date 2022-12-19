@@ -1,0 +1,15 @@
+{% extends 'store/main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="cats-row">
+    {% for c in cats %}
+        <div class="col-lg-4">
+            <a href="{{ c.get_absolute_url }}"><img class="thumbnail" width="400px" src="{{ c.image_URL }}" alt=""></a>
+            <div class="box-element-cat product">
+                <h6><strong><a href="{{ c.get_absolute_url }}">{{c.name}}</a></strong></h6>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
