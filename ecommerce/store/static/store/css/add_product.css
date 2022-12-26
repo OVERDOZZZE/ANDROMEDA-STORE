@@ -1,0 +1,21 @@
+body {
+    background: url('/static/store/images/add_product_bg.png');
+    }
+
+.box {
+    position: absolute;
+    width: 900px;
+    padding: 40px;
+    background: orange;
+    border-radius: 20px;
+}
+
+.box h1 {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.box input{
+    border-radius: 10px
+}

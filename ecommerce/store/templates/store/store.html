@@ -2,13 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="search_stroke">
-			<form action="" method="post">
-				{% csrf_token %}
 
-				<input type="text" placeholder="Искать">
-			</form>
-		</div>
     <div class="row">
         {% for product in products %}
         <div class="col-lg-4">
@@ -29,6 +23,14 @@
 
 {% endblock %}
 
+{% block search %}
+    <div class="search_stroke">
+			<form action="{% url 'search' %}" method="get">
+				<input class="search" type="text"  name="q" placeholder="Искать">
+                <button type="submit">Найти</button>
+			</form>
+    </div>
+{% endblock %}
 
 
 

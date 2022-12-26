@@ -7,12 +7,12 @@ from django.urls import reverse
 
 
 class Customer(models.Model):
-    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE, related_name='customer')
     name = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255)
 
     def __str__(self):
-        return self.name
+        return self.user.username
 
 
 class Product(models.Model):

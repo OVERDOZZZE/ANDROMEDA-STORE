@@ -34,6 +34,7 @@
 </head>
 <body>
 
+
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	  <a class="navbar-brand" href="{% url 'store' %}">
 		  <i class="fa-solid fa-infinity"></i> ANDROMEDA</a>
@@ -68,9 +69,9 @@
 					<i class="fa-solid fa-square-plus"></i> ДОБАВИТЬ ТОВАР</a></li>
 			<br>
 
-	     		<li class="list-cats"><a href="">{{ user.username }} |</a> <a href="{% url 'logout' %}">Выйти</a></li>
+	     		<li class="list-cats"><a href=""><i class="fa-regular fa-address-book"></i> {{ user.username }} |</a> <a href="{% url 'logout' %}"><i class="fa-solid fa-right-to-bracket"></i> Выйти</a></li>
 			{% else %}
-            	<li class="list-cats"><a href="{% url 'registration' %}">Регистрация |</a><a href="{% url 'login' %}"> Войти</a></li>
+            	<li class="list-cats"><a href="{% url 'registration' %}"><i class="fa-sharp fa-solid fa-id-card"></i> Регистрация</a> | <a href="{% url 'login' %}"><i class="fa-regular fa-address-book"></i>  Войти</a></li>
         	{% endif %}
 	     	<a href="{% url 'cart' %}">
 	    		<img  id="cart-icon" src="{% static 'store/images/cart.png' %}">
@@ -80,6 +81,8 @@
 	    </div>
 	  </div>
 	</nav>
+{% block search %}
+{% endblock %}
 
 <!--	 <div class="cats">-->
 <!--        <aside>-->

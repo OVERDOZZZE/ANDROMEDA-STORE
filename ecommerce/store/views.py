@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
@@ -8,7 +9,6 @@ from .forms import *
 from .models import *
 from django.http import JsonResponse, HttpResponse
 import json
-
 from .utils import DataMixin
 
 
@@ -31,6 +31,7 @@ def store(request):
         'products': products,
         'cartItems': cartItems,
     }
+
     return render(request, 'store/store.html', context=context)
 
 
@@ -103,6 +104,7 @@ class RegisterUser(DataMixin, CreateView):
     template_name = 'store/register.html'
     success_url = reverse_lazy('store')
 
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title="NameSite")
@@ -141,7 +143,7 @@ def show_post(request, post_slug):
 
 
 def show_category(request, cat_slug):
-    products = Product.objects.filter(cat__slug= cat_slug)
+    products = Product.objects.filter(cat__slug=cat_slug)
 
     context = {
         'title': 'Отображение по рубрикам',
@@ -170,6 +172,40 @@ def add_product(request):
         'form': form
     }
     return render(request, 'store/add_product.html', context=context)
+
+
+class Search(ListView):
+    template_name = 'store/store.html'
+    context_object_name = 'products'
+    paginate_by = 5
+
+    def get_queryset(self):
+        q = self.request.GET.get('q').capitalize()
+        return Product.objects.filter(name__icontains=q)
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['q'] = self.request.GET.get('q')
+        return context
+
+
+def register_user(request):
+    customer = Customer.objects.all()
+    if request.user.is_authenticated:
+        return redirect('/')
+    form = RegisterUserForm()
+    if request.method == 'POST':
+        form = RegisterUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            Customer.objects.create(
+                user=user,
+            )
+            return redirect('login')
+    context = {'form' : form}
+    return render(request, 'store/register.html', context)
+
+
 
 # class ProductCategories(DataMixin, ListView):
 #     model = Product

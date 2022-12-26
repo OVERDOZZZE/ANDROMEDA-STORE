@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-image: url('/static/store/images/shopping.jpg');
+  background: #2b275c;
   opacity: 0.96;
 }
 
@@ -16,7 +16,7 @@ body {
   transform: translate(-50%,-50%);
   background: #d9d7de;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow:hsl(0, 0%, 80%) 0 0 16px;
 
 
@@ -39,16 +39,16 @@ body {
   text-align: center;
   border: 2px solid #3498db;
   padding: 14px 44px;
-  width: 300px;
+  width: 400px;
   outline: none;
   color: black;
-  border-radius: 24px;
+  border-radius: 14px;
   transition: 0.25s;
 
 }
 
 .box input[type="text"]:focus,.box input[type="password"]:focus{
-  width: 310px;
+  width: 400px;
   border-color: #2ecc71;
 }
 
@@ -72,7 +72,9 @@ body {
 }
 
 .btn-success {
-    width: 100px;
+    width: 150px;
+    padding: 15px;
     margin-top: 30px;
-    margin-bottom: 0px
+    margin-bottom: 0px;
+    font-size: 22px
 }
