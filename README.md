@@ -1,4 +1,5 @@
-# :star2:Marketplace-project
+# `MARKETPLACE-ANDROMEDA`:star2:
+
 
 This project is my first django python framework project, which was created by reworking many other projects. The project is a marketplace bulletin board and is still far from perfect.Hosting was not implemented on the project due to uselessness
 The project was made dynamically with a parallel study of the django framework from the YouTube channel [Selfedu YT](https://www.youtube.com/@selfedu_rus/featured)▶️
@@ -13,8 +14,16 @@ The project was made dynamically with a parallel study of the django framework f
 
 ✔️ ~~My tears~~
 
+## `Cart without API` 🛒
 
-## What are the possibilities of the Market?
+Django took care of connecting to the server and facilitating the connection between the client and the database. My job was to write modules and the logic of actions with them.
+
+I had to use Javascript to organize the cart, because I did not use API serializers. I re-imagined the scripts to listen for each button click, which allowed me to add an item to the cart without refreshing the page
+
+
+
+
+## `What are the possibilities of the Market?`
 
 1️⃣   There is registration and authorization  :frowning_man:
 
